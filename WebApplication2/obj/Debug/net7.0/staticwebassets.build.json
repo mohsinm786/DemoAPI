@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "b1mWX6+bt/u1KlQWUIKtoOpbq6zU7qCxk7LR53mklEQ=",
-  "Source": "WebApplication2",
-  "BasePath": "_content/WebApplication2",
+  "Hash": "Uz8C0QBL75IT/UmdC2j+iScV886paMd/hy2mZktp1Cc=",
+  "Source": "EmployeeManagement",
+  "BasePath": "_content/EmployeeManagement",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "EmployeeManagement\\wwwroot",
+      "Source": "EmployeeManagement",
+      "ContentRoot": "C:\\Users\\TGCUser105\\Desktop\\DemoAPI-development\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/EmployeeManagement",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\TGCUser105\\Desktop\\DemoAPI-development\\WebApplication2\\wwwroot\\Uploads\\0397a496-f5d2-4154-aafa-c38aabb817dd_.node_repl_history",
+      "SourceId": "EmployeeManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\TGCUser105\\Desktop\\DemoAPI-development\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/EmployeeManagement",
+      "RelativePath": "Uploads/0397a496-f5d2-4154-aafa-c38aabb817dd_.node_repl_history",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\0397a496-f5d2-4154-aafa-c38aabb817dd_.node_repl_history"
+    }
+  ]
 }

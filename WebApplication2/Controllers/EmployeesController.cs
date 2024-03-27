@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Data;
-using WebApplication2.Entities;
-using WebApplication2.Services;
-using static WebApplication2.Repository.EmployeeRepository;
+using EmployeeManagement.Data;
+using EmployeeManagement.Entities;
+using EmployeeManagement.Services;
+using static EmployeeManagement.Repository.EmployeeRepository;
+using EmployeeManagement.ViewModels;
 
-namespace WebApplication2.Controllers
+namespace EmployeeManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -51,7 +52,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("add-employee")]
-        public async Task<ActionResult<Employee>> PostEmployee([FromForm] EmployeeWithImageInput employee)
+        public async Task<ActionResult<Employee>> PostEmployee([FromForm] EmployeeVM employee)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPut("update-employee/{id}")]
-        public async Task<IActionResult> PutEmployee(int id, [FromForm] EmployeeWithImageInput employee)
+        public async Task<IActionResult> PutEmployee(int id, [FromForm] EmployeeVM employee)
         {
             try
             {

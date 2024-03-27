@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication2.Data;
+using EmployeeManagement.Data;
 
 #nullable disable
 
-namespace WebApplication2.Migrations
+namespace EmployeeManagement.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20240326090648_Second")]
@@ -25,7 +25,7 @@ namespace WebApplication2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication2.Entities.Employee", b =>
+            modelBuilder.Entity("EmployeeManagement.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

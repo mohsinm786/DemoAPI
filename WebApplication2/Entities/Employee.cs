@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication2.Entities
+namespace EmployeeManagement.Entities
 {
     public class Employee
     {
@@ -15,10 +15,10 @@ namespace WebApplication2.Entities
         [StringLength(1, ErrorMessage = "Enter M/F")]
         public string? Gender { get; set; }
         public bool MaritalStatus { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [StringLength(100, ErrorMessage = "Should not cross 100 characters")]
         public string? Hobbies { get; set; }
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
         [Range(5000, double.MaxValue, ErrorMessage = "The value must be greater than 5000.")]
         public decimal? Salary { get; set; }
         [StringLength(500)]

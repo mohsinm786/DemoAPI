@@ -1,11 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using WebApplication2.Data;
-using WebApplication2.Repository;
-using WebApplication2.Services;
+using EmployeeManagement.Data;
+using EmployeeManagement.Repository;
+using EmployeeManagement.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
@@ -28,6 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

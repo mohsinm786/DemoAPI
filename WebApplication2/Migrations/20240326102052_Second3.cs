@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace WebApplication2.Migrations
+namespace EmployeeManagement.Migrations
 {
     /// <inheritdoc />
     public partial class Second3 : Migration

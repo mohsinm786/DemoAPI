@@ -1,16 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using WebApplication2.Data;
-using WebApplication2.Entities;
+using EmployeeManagement.Data;
+using EmployeeManagement.Entities;
+using EmployeeManagement.ViewModels;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Builder;
 
-namespace WebApplication2.Repository
+namespace EmployeeManagement.Repository
 {
     public class EmployeeRepository: IEmployeeRepository
     {
         private readonly DataContext _context;
-        public EmployeeRepository(DataContext context)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public EmployeeRepository(DataContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<Employee> GetByIdAsync(int id)
@@ -23,17 +32,17 @@ namespace WebApplication2.Repository
             return await _context.Employees.ToListAsync();
         }
 
-        public async Task AddAsync(EmployeeWithImageInput employee)
+        public async Task AddAsync(EmployeeVM employee)
         {
-            byte[] imageData = null;
-            if (employee.Photo != null && employee.Photo.Length > 0)
+            if (employee.Photo == null || employee.Photo.Length <= 0)
+                throw new ArgumentException("Photo cannot be null or empty.");
+            var uniqueFileName = $"{Guid.NewGuid()}_{employee.Photo.FileName}";
+            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Uploads");
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await employee.Photo.CopyToAsync(memoryStream);
-                    imageData = memoryStream.ToArray();
-                }
-            }
+                await employee.Photo.CopyToAsync(fileStream);
+            }            
             var newEmployee = new Employee()
             {
                 Id = employee.Id,
@@ -52,23 +61,22 @@ namespace WebApplication2.Repository
                 Hobbies = employee.Hobbies,
                 Password = employee.Password,
                 ZipCode = employee.ZipCode,
-                Photo = imageData,
-
+                Photo = uniqueFileName,
             };
             _context.Employees.Add(newEmployee);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(EmployeeWithImageInput updatedEmployee)
+        public async Task UpdateAsync(EmployeeVM updatedEmployee)
         {
-            byte[] imageData = null;
-            if (updatedEmployee.Photo != null && updatedEmployee.Photo.Length > 0)
+            if (updatedEmployee.Photo == null || updatedEmployee.Photo.Length <= 0)
+                throw new ArgumentException("Photo cannot be null or empty.");
+            var uniqueFileName = $"{Guid.NewGuid()}_{updatedEmployee.Photo.FileName}";
+            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Uploads");
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await updatedEmployee.Photo.CopyToAsync(memoryStream);
-                    imageData = memoryStream.ToArray();
-                }
+                await updatedEmployee.Photo.CopyToAsync(fileStream);
             }
 
             var currentEmployee = await _context.Employees.FirstOrDefaultAsync();
@@ -89,7 +97,7 @@ namespace WebApplication2.Repository
                 currentEmployee.Hobbies = updatedEmployee.Hobbies;
                 currentEmployee.Password = updatedEmployee.Password;
                 currentEmployee.ZipCode = updatedEmployee.ZipCode;
-                currentEmployee.Photo = imageData;
+                currentEmployee.Photo = uniqueFileName;
             }
             await _context.SaveChangesAsync();
         }
@@ -104,37 +112,14 @@ namespace WebApplication2.Repository
             }
         }
 
-        public class EmployeeWithImageInput
+        public Task AddAsync(Employee entity)
         {
-            [Key]
-            public int Id { get; set; }
-            [Required, StringLength(50, ErrorMessage = "First name must not exceed 50 characters.")]
-            public string? FirstName { get; set; }
-            [Required, StringLength(50, ErrorMessage = "Last name must not exceed 50 characters.")]
-            public string? LastName { get; set; }
-            [Required,StringLength(50, ErrorMessage = "Email must not exceed 50 characters."), EmailAddress(ErrorMessage = "Invalid email address format")]
-            public string? Email { get; set; }
-            [StringLength(1, ErrorMessage = "Enter M/F")]
-            public string? Gender { get; set; }
-            public bool MaritalStatus { get; set; }
-            public DateOnly BirthDate { get; set; }
-            [StringLength(100, ErrorMessage = "Should not cross 100 characters")]
-            public string? Hobbies { get; set; }
-            [Range(5000, double.MaxValue, ErrorMessage = "The value must be greater than 5000.")]
-            public decimal? Salary { get; set; }
-            [StringLength(500)]
-            public string? Address { get; set; }
-            public int Country { get; set; }
-            public int State { get; set; }
-            public int City { get; set; }
-            [RegularExpression(@"^\d{6}$", ErrorMessage = "The property must be a 6-digit number.")]
-            public string? ZipCode { get; set; }
-            [Required,RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$", ErrorMessage = "Password must be 8-16 characters long and contain at least one uppercase letter, one number, and one special character.")]
-            public string? Password { get; set; }
-            public DateTime Created { get; set; }
-
-            public IFormFile Photo { get; set; } // Property to accept image input
+            throw new NotImplementedException();
         }
 
+        public Task UpdateAsync(Employee entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,14 +1,15 @@
-﻿using WebApplication2.Entities;
-using static WebApplication2.Repository.EmployeeRepository;
+﻿using EmployeeManagement.Entities;
+using EmployeeManagement.ViewModels;
+using static EmployeeManagement.Repository.EmployeeRepository;
 
-namespace WebApplication2.Services
+namespace EmployeeManagement.Services
 {
     public interface IEmployeeService
     {
         Task<Employee> GetEmployeeByIdAsync(int id);
         Task<List<Employee>> GetAllEmployeesAsync();
-        Task AddEmployeeAsync(EmployeeWithImageInput employee);
-        Task UpdateEmployeeAsync(EmployeeWithImageInput employee);
+        Task AddEmployeeAsync(EmployeeVM employee);
+        Task UpdateEmployeeAsync(EmployeeVM employee);
         Task DeleteEmployeeAsync(int id);
     }
 }

@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\TGCUser105\\Desktop\\DemoAPI-development\\WebApplication2\\wwwroot\\Uploads\\0397a496-f5d2-4154-aafa-c38aabb817dd_.node_repl_history",
+      "PackagePath": "staticwebassets\\Uploads\\0397a496-f5d2-4154-aafa-c38aabb817dd_.node_repl_history"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.EmployeeManagement.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.EmployeeManagement.props",
+      "PackagePath": "build\\EmployeeManagement.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.EmployeeManagement.props",
+      "PackagePath": "buildMultiTargeting\\EmployeeManagement.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.EmployeeManagement.props",
+      "PackagePath": "buildTransitive\\EmployeeManagement.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
